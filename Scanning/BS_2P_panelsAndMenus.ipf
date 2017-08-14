@@ -189,8 +189,8 @@ Function Init2PVariables()
 		variable/g root:Packages:BS2P:CurrentScanVariables:lineSpacing = 0.6e-6		 //--- determines distance between lines initializes to a minimum
 		variable/g root:Packages:BS2P:CurrentScanVariables:scaledX = 0	//Distance of X-axis scan in m
 		variable/g root:Packages:BS2P:CurrentScanVariables:scaledY = 0	//Distance of Y-axis scan in m
-		variable/g root:Packages:BS2P:CurrentScanVariables:X_Offset = 0	//Where to start the X-axis scan in µm from center
-		variable/g root:Packages:BS2P:CurrentScanVariables:Y_Offset = 0	//Where to start the Y-axis scan in µm from center
+		variable/g root:Packages:BS2P:CurrentScanVariables:X_Offset = 0	//Where to start the X-axis scan in Âµm from center
+		variable/g root:Packages:BS2P:CurrentScanVariables:Y_Offset = 0	//Where to start the Y-axis scan in Âµm from center
 		variable/g root:Packages:BS2P:CurrentScanVariables:lineTime = 2e-3	//ms / line
 		variable/g root:Packages:BS2P:CurrentScanVariables:scanOutFreq = 100e3	//kHz resolution to send to galcos
 		variable/g root:Packages:BS2P:CurrentScanVariables:KCT = 100e-3	//Time between frames of a kinetic series
@@ -226,7 +226,7 @@ Function Init2PVariables()
 		variable/g root:Packages:BS2P:CurrentScanVariables:scanFrameTime = 0	//ms
 		variable/g  root:Packages:BS2P:CalibrationVariables:spotSize = 0.6e-6	//smallest theoretical spot from Bruno (m)
 		variable/g  root:Packages:BS2P:CalibrationVariables:pixelShift = 87.5e-6	// s  ---measure this by giving voltages to scanners
-		variable/g  root:Packages:BS2P:CurrentScanVariables:focusStep = 20		// µm
+		variable/g  root:Packages:BS2P:CurrentScanVariables:focusStep = 20		// Âµm
 		variable/g root:Packages:BS2P:CurrentScanVariables:fullField = 250e-6	//m to scan for a full field
 		variable/g root:Packages:BS2P:CurrentScanVariables:objectiveMag = 60
 		variable/g root:Packages:BS2P:CurrentScanVariables:samplesPerPixel = 1
@@ -295,7 +295,7 @@ function BS_2P_makeKineticWindow()
 	SetVariable BS_2P_pixelShifter,limits={0,0.0002,5e-07},value= root:Packages:BS2P:CalibrationVariables:pixelShift
 
 	
-//	SetVariable SetPixelSize,pos={4,31},size={90,16},proc=BS_2P_setPixelSizeProc,title="Binning (µm):"
+//	SetVariable SetPixelSize,pos={4,31},size={90,16},proc=BS_2P_setPixelSizeProc,title="Binning (Âµm):"
 //	SetVariable SetPixelSize,frame=0,valueColor=(65280,0,0)
 //	SetVariable SetPixelSize,valueBackColor=(60928,60928,60928)
 //	SetVariable SetPixelSize,limits={0.025,inf,0},value= root:Packages:BS2P:CurrentScanVariables:displayPixelSize
@@ -372,7 +372,7 @@ function BS_2P_makeKineticWindow()
 
 
 	
-	SetVariable setZoom,pos={545,43},size={82,16},proc=BS_2P_SetFramesProc,title="Zoom (µm)"
+	SetVariable setZoom,pos={545,43},size={82,16},proc=BS_2P_SetFramesProc,title="Zoom (Âµm)"
 	SetVariable setZoom,frame=0,valueBackColor=(65535,65535,65535)
 	SetVariable setZoom,limits={-inf,inf,0},value= root:Packages:BS2P:CurrentScanVariables:zoomFactor
 
@@ -399,14 +399,14 @@ function BS_2P_makeKineticWindow()
 		SetVariable setMoveStep,limits={-inf,inf,0},value= root:Packages:BS2P:CurrentScanVariables:moveStep
 
 		ValDisplay stageX,pos={107,100},size={70,14},title="X:"
-		ValDisplay stageX,labelBack=(65280,65280,32768),format="%.1f µm",frame=0
+		ValDisplay stageX,labelBack=(65280,65280,32768),format="%.1f Âµm",frame=0
 		ValDisplay stageX,valueBackColor=(65280,65280,32768)
 		ValDisplay stageX,limits={0,0,0},barmisc={0,1000}
 		ValDisplay stageX,value= #"root:Packages:PI_xPos"
 		ValDisplay stageX,barBackColor= (65280,65280,32768)
 		
 		ValDisplay stageY,pos={172,100},size={68,14},bodyWidth=54,title="Y:"
-		ValDisplay stageY,labelBack=(65280,65280,32768),format="%.1f µm",frame=0
+		ValDisplay stageY,labelBack=(65280,65280,32768),format="%.1f Âµm",frame=0
 		ValDisplay stageY,valueBackColor=(65280,65280,32768)
 		ValDisplay stageY,limits={0,0,0},barmisc={0,1000}
 		ValDisplay stageY,value= #"root:Packages:PI_yPos"
@@ -426,7 +426,7 @@ function BS_2P_makeKineticWindow()
 //		Button FocusDown,fSize=8
 		Button FocusDown,pos={314,57},size={33,18},proc=BS_2P_focusDownButtonProc,title="down"
 		Button FocusDown,fSize=8
-		SetVariable focusStep,pos={310,41},size={50,16},title="µm",frame=0
+		SetVariable focusStep,pos={310,41},size={50,16},title="Âµm",frame=0
 		SetVariable focusStep,valueBackColor=(60928,60928,60928)
 		SetVariable focusStep,limits={0,2000,0},value= root:Packages:BS2P:CurrentScanVariables:focusStep
 		GroupBox stackBox,pos={370,24},size={103,53}
@@ -434,15 +434,15 @@ function BS_2P_makeKineticWindow()
 		Button doStack,pos={373,27},size={34,20},proc=doStack,title="stack",fSize=8
 		Button doStack,fColor=(61440,61440,61440)
 
-		SetVariable stackDepth,pos={381,46},size={86,16},title="depth (µm)",frame=0
+		SetVariable stackDepth,pos={381,46},size={86,16},title="depth (Âµm)",frame=0
 		SetVariable stackDepth,limits={0,2000,0},value= root:Packages:BS2P:CurrentScanVariables:stackDepth
 
-		SetVariable stackResolution,pos={375,61},size={95,16},title="resolution (µm)"
+		SetVariable stackResolution,pos={375,61},size={95,16},title="resolution (Âµm)"
 		SetVariable stackResolution,frame=0
 		SetVariable stackResolution,limits={0,20,0},value= root:Packages:BS2P:CurrentScanVariables:stackResolution
 		
 		ValDisplay stageZ,pos={239,100},size={65,14},title="Z:"
-		ValDisplay stageZ,labelBack=(65280,65280,32768),format="%.1f µm",frame=0
+		ValDisplay stageZ,labelBack=(65280,65280,32768),format="%.1f Âµm",frame=0
 		ValDisplay stageZ,valueBackColor=(65280,65280,32768)
 		ValDisplay stageZ,limits={0,0,0},barmisc={0,1000}
 		ValDisplay stageZ,value= #"root:Packages:PI_zPos"
@@ -865,9 +865,9 @@ End
 
 function BS_2P_measure()
 	getmarquee/K left, bottom
-	print "X = ", V_right - V_left, "µm"
-	print "Y = ", V_top - V_bottom, "µm"
-	print "diaganol = ", sqrt(( V_right - V_left)^2 + (V_top - V_bottom)^2), "µm"
+	print "X = ", V_right - V_left, "Âµm"
+	print "Y = ", V_top - V_bottom, "Âµm"
+	print "diaganol = ", sqrt(( V_right - V_left)^2 + (V_top - V_bottom)^2), "Âµm"
 	
 end
 
@@ -882,7 +882,7 @@ Function SetobjectiveMagProc(sva) : SetVariableControl
 			String sval = sva.sval
 			scaleFactor = (2220 * (180/dval) * (1/200))	//f scanlens * tg (2/0,785) = 50 * tg (2/0,785) = 2,22 mm / V
 			BS_2P_UpdateVariables()
-			BS_2P_CreateScan()		//pour 1 V, déplacement du faisceau de 2,22 * f objectif / f tubelens = 2220 (µm) * 180/60 * 1/200
+			BS_2P_CreateScan()		//pour 1 V, dÃ©placement du faisceau de 2,22 * f objectif / f tubelens = 2220 (Âµm) * 180/60 * 1/200
 			break
 		case -1: // control being killed
 			break
@@ -937,7 +937,7 @@ Function ZoomOutProc_2(ba) : ButtonControl
 	STRUCT WMButtonAction &ba
 	NVAR scaledX = root:Packages:BS2P:CurrentScanVariables:scaledX
 	NVAR scaledY =  root:Packages:BS2P:CurrentScanVariables:scaledY	//Distance of Y-axis scan in m
-	NVAR X_Offset =  root:Packages:BS2P:CurrentScanVariables:X_Offset	//Where to start the X-axis scan in µm from center
+	NVAR X_Offset =  root:Packages:BS2P:CurrentScanVariables:X_Offset	//Where to start the X-axis scan in Âµm from center
 	NVAR Y_Offset =  root:Packages:BS2P:CurrentScanVariables:Y_Offset
 	NVAR zoomfactor = root:Packages:BS2P:CurrentScanVariables:zoomFactor
 	switch( ba.eventCode )
@@ -963,7 +963,7 @@ Function ZoomInProc_2(ba) : ButtonControl
 	STRUCT WMButtonAction &ba
 	NVAR scaledX = root:Packages:BS2P:CurrentScanVariables:scaledX
 	NVAR scaledY =  root:Packages:BS2P:CurrentScanVariables:scaledY	//Distance of Y-axis scan in m
-	NVAR X_Offset =  root:Packages:BS2P:CurrentScanVariables:X_Offset	//Where to start the X-axis scan in µm from center
+	NVAR X_Offset =  root:Packages:BS2P:CurrentScanVariables:X_Offset	//Where to start the X-axis scan in Âµm from center
 	NVAR Y_Offset =  root:Packages:BS2P:CurrentScanVariables:Y_Offset
 	NVAR zoomfactor = root:Packages:BS2P:CurrentScanVariables:zoomFactor
 	switch( ba.eventCode )
@@ -1138,7 +1138,7 @@ function bs_2P_initDIO(devNum, port, line)
 	string devNum, port, line
 	
 	string pfiString = "/"+devNum+"/port"+port+ "/line" + line
-	daqmx_dio_config/dir=1/dev=devNum pfiString
+	daqmx_dio_config/dir=1/dev=devNum/lgrp=1 pfiString
 	variable DIOTaskNumber = V_DAQmx_DIO_TaskNumber
 //	fdaqmx_dio_write(devNum, DIOTaskNumber, 0)
 	return DIOTaskNumber
