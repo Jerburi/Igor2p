@@ -1188,7 +1188,7 @@ function MakeListofROIs()
 	
 	SVAR ListallROIs = root:currentROIs:listallrois
 	if(SVAR_exists(listallrois) == 0 )
-		variable/g root:currentrois:ListAllROIs
+		string/g root:currentrois:ListAllROIs
 	endif
 	string raws = wavelist("Mask_ROI_*",";","")
 	string braws = wavelist("Mask_BROI_*",";","")
