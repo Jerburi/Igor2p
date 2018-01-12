@@ -839,6 +839,7 @@ function DrawBROIs()
 	SVAR backcolor = root:currentrois:backcolor
 		if(svar_exists(backcolor) == 0 )
 			string/g root:CurrentROIs:backcolor = "(0,0,65280)"
+			SVAR backcolor = root:currentrois:backcolor
 		endif
 			
 	
